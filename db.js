@@ -28,7 +28,7 @@ async function init() {
     await db.query(`
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
-        username VARCHAR(50)
+        user_name VARCHAR(50)
       );
     `);
 
