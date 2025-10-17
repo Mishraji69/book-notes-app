@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= bookName %> - Notes</title>
+  <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📝 Notes for <%= bookName %></h1>
+
+    <form action="/add-note" method="POST" class="form">
+      <input type="hidden" name="userId" value="<%= userId %>">
+      <input type="hidden" name="books_id" value="<%= books_id %>">
+      <textarea name="notes_text" rows="4" placeholder="Write your notes..." required></textarea>
+      <input type="date" name="shipment_date" required>
+      <button type="submit">Add Note</button>
+
+    </form>
+
+    <div class="notes-list">
+      <% if (notes.length === 0) { %>
+        <p class="empty">No notes yet. Add one!</p>
+      <% } else { %>
+        <% notes.forEach(note => { %>
+          <div class="note-card">
+            <p><%= note.text %></p>
+            <small>🕓 <%= note.shipment_date.toDateString() %></small>
+            <form action="/delete-note" method="POST">
+              <input type="hidden" name="notes_Id" value="<%= note.notes_id %>">
+              <input type="hidden" name="userId" value="<%= userId %>">
+              <input type="hidden" name="books_id" value="<%= books_id %>">
+              <button class="delete-btn">Delete</button>
+            </form>
+          </div>
+        <% }); %>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

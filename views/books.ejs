@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Books</title>
+  <link rel="stylesheet" href="/main.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Your Books 📖</h1>
+
+    <form action="/add-book" method="POST" class="form">
+      <input type="hidden" name="userId" value="<%= userId %>">
+      <input type="text" name="bookname" placeholder="Enter book name" required>
+      <button type="submit">Add Book</button>
+    </form>
+
+    <div class="notes-list">
+      <% if (books.length === 0) { %>
+        <p class="empty">No books yet. Add your first one!</p>
+      <% } else { %>
+        <% books.forEach(book => { %>
+          <div class="note-card">
+            <h3><%= book.book_name %></h3>
+            <a href="/notes?userId=<%= userId %>&books_id=<%= book.book_id %>">Open Notes ➜</a>
+          </div>
+        <% }); %>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>
