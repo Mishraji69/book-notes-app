@@ -29,7 +29,7 @@ app.post('/register',async(req,res)=>
 
     }
     else{
-      const result=await db.query('Insert into users (user_name) values ($1) returning user_id'[name]);
+      const result=await db.query('Insert into users (user_name) values ($1) returning user_id',[name]);
       console.log("New user registered");
       userId=result.rows[0].user_id;
       res.redirect('/add-books?userId='+userId);
